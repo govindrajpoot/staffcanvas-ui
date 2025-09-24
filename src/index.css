@@ -2,39 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* HRMS Design System - Professional Enterprise Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core HRMS Brand Colors */
+    --primary: 217 91% 60%;        /* Professional Blue #3B82F6 */
+    --primary-hover: 217 91% 55%;  /* Darker blue for hover states */
+    --primary-foreground: 0 0% 100%;
 
+    --secondary: 142 76% 36%;      /* Professional Teal #059669 */
+    --secondary-hover: 142 76% 31%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 25 95% 53%;          /* Orange accent #F97316 */
+    --accent-hover: 25 95% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Backgrounds */
+    --background: 220 14% 96%;     /* Light gray background */
+    --background-subtle: 220 14% 98%;
+    --foreground: 222 84% 5%;      /* Almost black text */
+
+    /* Card and Surface Colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 84% 5%;
+    --card-hover: 220 14% 98%;
 
+    /* UI Elements */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
+
+    /* Status Colors */
+    --success: 142 76% 36%;        /* Green for success */
+    --success-foreground: 0 0% 100%;
+    --warning: 45 93% 47%;         /* Amber for warnings */
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;      /* Red for errors */
+    --destructive-foreground: 0 0% 100%;
+
+    /* Muted Colors */
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+    
+    /* Popover */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 84% 5%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(142 76% 36%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(217 91% 55%) 50%, hsl(142 76% 36%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 14% 98%) 100%);
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -2px hsl(0 0% 0% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 10px 10px -5px hsl(0 0% 0% / 0.04);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-out;
 
     --radius: 0.5rem;
 
@@ -101,5 +130,59 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
   }
 }
+
+@layer components {
+  /* HRMS Component Styles */
+  .hrms-card {
+    @apply bg-card border border-border rounded-lg shadow-md hover:shadow-lg transition-all duration-300;
+  }
+  
+  .hrms-card-hover {
+    @apply hover:bg-card-hover hover:scale-[1.02] transform;
+  }
+  
+  .hrms-button-primary {
+    @apply bg-primary hover:bg-primary-hover text-primary-foreground;
+  }
+  
+  .hrms-button-secondary {
+    @apply bg-secondary hover:bg-secondary-hover text-secondary-foreground;
+  }
+  
+  .hrms-button-accent {
+    @apply bg-accent hover:bg-accent-hover text-accent-foreground;
+  }
+  
+  .hrms-gradient-bg {
+    background: var(--gradient-primary);
+  }
+  
+  .hrms-hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .hrms-sidebar {
+    @apply bg-card border-r border-border shadow-lg;
+  }
+  
+  .hrms-metric-card {
+    @apply hrms-card hrms-card-hover p-6 text-center;
+  }
+  
+  .hrms-nav-item {
+    @apply flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200;
+  }
+  
+  .hrms-nav-item-active {
+    @apply bg-primary text-primary-foreground;
+  }
+  
+  .hrms-nav-item-inactive {
+    @apply text-muted-foreground hover:bg-muted hover:text-foreground;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
